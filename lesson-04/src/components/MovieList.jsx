@@ -5,8 +5,11 @@ function MovieList({ title, movies }) {
   return (
     <section className="movie-list">
       <h2 className="movie-list__title">{title}</h2>
+      {movies.length === 0 && (
+        <p className="movie-list__empty">לא נמצאו סרטים</p>
+      )}
       <div className="movie-list__grid">
-        {movies.map((movie) => (
+        {movies.map(movie => (
           <MovieCard
             key={movie.id}
             title={movie.title}
@@ -19,14 +22,6 @@ function MovieList({ title, movies }) {
           />
         ))}
       </div>
-
-      <ul className="movie-list__summary">
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            {movie.title} — {movie.year}
-          </li>
-        ))}
-      </ul>
     </section>
   );
 }
