@@ -1,15 +1,14 @@
 import MovieCard from "./MovieCard.jsx";
-import { movies } from "../data/movies.js";
 import "./MovieList.css";
 
-function MovieList() {
+function MovieList({ title, movies }) {
   return (
     <section className="movie-list">
-      <h2 className="movie-list__title">כל הסרטים</h2>
+      <h2 className="movie-list__title">{title}</h2>
       <div className="movie-list__grid">
-        {movies.map(movie => (
+        {movies.map((movie, index) => (
           <MovieCard
-            key={movie.id}
+            key={index}
             title={movie.title}
             year={movie.year}
             duration={movie.duration}
@@ -20,6 +19,14 @@ function MovieList() {
           />
         ))}
       </div>
+
+      <ul className="movie-list__summary">
+        {movies.map((movie) => (
+          <li key={movie.id}>
+            {movie.title} — {movie.year}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }
