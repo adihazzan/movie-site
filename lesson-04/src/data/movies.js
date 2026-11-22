@@ -59,4 +59,14 @@ export const movies = [
     poster: "/posters/the-dark-knight.svg",
     available: false,
   },
+  {
+    id: 7,
+    title: "Coco",
+    year: 2017,
+    duration: 105,
+    genre: "Animation",
+    rating: 8.4,
+    poster: "/posters/coco.svg",
+    available: true,
+  },
 ];
