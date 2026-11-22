@@ -33,6 +33,11 @@ function App() {
     setVisibleCount(visibleCount + 4);
   }
 
+  function handleSelectGenre(genre) {
+  setSelectedGenre(genre);
+  setVisibleCount(4);
+}
+
   return (
     <>
       <Header />
@@ -45,6 +50,7 @@ function App() {
         <MovieList title="הכי מדורגים" movies={topRated} />
 
         <div className="toolbar">
+          
           <button
             className={onlyAvailable ? "btn btn--active" : "btn"}
             onClick={toggleAvailable}

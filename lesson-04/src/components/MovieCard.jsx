@@ -10,6 +10,12 @@ function MovieCard({ title, year, duration, genre, rating, poster, available }) 
     setLiked((prev) => !prev);
   }
 
+  function handleRatingClick(star) {
+  setUserRating((prev) => (prev === star ? 0 : star));
+}
+
+
+  const [userRating, setUserRating] = useState(0); // <-- right here
   return (
     <article className={`movie-card ${watched ? "movie-card--watched" : ""}`}>
       <div className="movie-card__poster">
@@ -29,6 +35,20 @@ function MovieCard({ title, year, duration, genre, rating, poster, available }) 
         <p className="movie-card__meta">
           {year} · {duration} דק׳
         </p>
+        <div className="movie-card__user-rating">
+  <span>הדירוג שלי:</span>
+  {[1, 2, 3, 4, 5].map((star) => (
+    <button
+      key={star}
+      type="button"
+      className="movie-card__star"
+      onClick={() => handleRatingClick(star)}
+      aria-label={`דרג ${star} מתוך 5`}
+    >
+      {star <= userRating ? "★" : "☆"}
+    </button>
+  ))}
+</div>
 
         <button
           type="button"

@@ -102,3 +102,19 @@
 .movie-card--watched {
   opacity: 0.6;
 }
+.movie-card__user-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.movie-card__star {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--gold);
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+}
