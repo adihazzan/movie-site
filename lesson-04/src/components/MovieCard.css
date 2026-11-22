@@ -98,3 +98,7 @@
 .movie-card__like:hover {
   background: var(--surface);
 }
+
+.movie-card--watched {
+  opacity: 0.6;
+}
