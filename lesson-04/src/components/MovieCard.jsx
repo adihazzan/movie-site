@@ -1,31 +1,31 @@
 import { useState } from "react";
 import "./MovieCard.css";
 
-function MovieCard({ title, year, genre, rating, poster, available, duration }) {
-  const [showDetails, setShowDetails] = useState(false);
-  const [watched, setWatched] = useState(false);
+function MovieCard({ title, year, duration, genre, rating, poster, available }) {
+  const [liked, setLiked] = useState(false);
+  const [showDetails, setShowDetails] = useState(false); // 1. Add here
+
+  function handleLike() {
+    setLiked(!liked);
+    console.log("liked:", liked);
+  }
 
   return (
-    <article className={`movie-card ${watched ? "movie-card--watched" : ""}`}>
+    <article className="movie-card">
       <div className="movie-card__poster">
         <img src={poster} alt={title} />
         {available && <span className="movie-card__badge">זמין לצפייה</span>}
+        <button className="movie-card__like" onClick={handleLike}>
+          {liked ? "♥" : "♡"}
+        </button>
       </div>
-
       <div className="movie-card__body">
         <h3 className="movie-card__title">{title}</h3>
         <p className="movie-card__meta">
           {year} · {duration} דק׳
         </p>
 
-        <button
-          type="button"
-          className="movie-card__watched-btn"
-          onClick={() => setWatched((prev) => !prev)}
-        >
-          צפיתי
-        </button>
-
+        {/* 2. Add button here */}
         <button
           type="button"
           className="movie-card__toggle"
@@ -34,6 +34,7 @@ function MovieCard({ title, year, genre, rating, poster, available, duration }) 
           פרטים
         </button>
 
+        {/* 3. Wrap footer with showDetails && */}
         {showDetails && (
           <div className="movie-card__footer">
             <span className="movie-card__genre">{genre}</span>
