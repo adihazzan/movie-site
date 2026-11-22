@@ -1,42 +1,39 @@
 import { useState } from "react";
 import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
 import MovieList from "./components/MovieList.jsx";
+import Footer from "./components/Footer.jsx";
 import { movies } from "./data/movies.js";
 
 function App() {
-  const [onlyAvailable, setOnlyAvailable] = useState(false);
+  const [sortByRating, setSortByRating] = useState(false);
 
-  const topRated = movies.filter(movie => movie.rating >= 8.7);
-  const shownMovies = onlyAvailable
-    ? movies.filter(movie => movie.available)
+  const animationMovies = movies.filter((movie) => movie.genre === "Animation");
+  const shortMovies = movies.filter((movie) => movie.duration <= 100);
+
+  const catalogMovies = sortByRating
+    ? [...movies].sort((a, b) => b.rating - a.rating)
     : movies;
-
-  function toggleAvailable() {
-    setOnlyAvailable(!onlyAvailable);
-  }
 
   return (
     <>
-      <Header />
-      <main className="page container">
-        <section className="page__intro">
-          <h1>הקטלוג</h1>
-          <p>סרטים שכדאי לראות — הישנים הטובים והחדשים.</p>
-        </section>
-
-        <MovieList title="הכי מדורגים" movies={topRated} />
-
+      <Header movieCount={movies.length} />
+      <main className="container">
         <div className="toolbar">
           <button
-            className={onlyAvailable ? "btn btn--active" : "btn"}
-            onClick={toggleAvailable}
+            type="button"
+            className={sortByRating ? "is-active" : ""}
+            onClick={() => setSortByRating((prev) => !prev)}
           >
-            רק זמינים לצפייה
+            מיון לפי דירוג
           </button>
         </div>
 
-        <MovieList title="כל הסרטים" movies={shownMovies} />
+        <MovieList
+          title={`כל הסרטים (${catalogMovies.length})`}
+          movies={catalogMovies}
+        />
+        <MovieList title="אנימציה" movies={animationMovies} />
+        <MovieList title="קצרים — עד 100 דקות" movies={shortMovies} />
       </main>
       <Footer />
     </>
